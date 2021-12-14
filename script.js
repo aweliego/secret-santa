@@ -28,6 +28,9 @@ const assignElves = (secretSantas, elves) => {
     let randomElf = getRandomName(elves);
     // If randomElf is the same person as current secretSanta, keep picking a name
     while (secretSanta === randomElf) {
+      if (secretSanta !== randomElf) {
+        break;
+      }
       randomElf = getRandomName(elves);
     }
     // Remove randomElf from elves array (so it can't be picked again)

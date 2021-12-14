@@ -1,25 +1,40 @@
-const names = [
-  'Michel Scott',
-  'Dwight Schrute',
-  'Jim Halpert',
-  'Pam Beesly',
-  'Jan Levinson',
-  'Kevin Malone',
-  'Toby Flenderson',
-  'Angela Martin',
-  'Andy Bernard',
-  'Stanley Hudson',
-  'Ryan Howard',
-  'Kelly Kapoor',
-  'Phyllis Vance',
-];
+const tagsEl = document.getElementById('tags');
+const textarea = document.getElementById('textarea');
+
+textarea.focus();
+
+textarea.addEventListener('keyup', (e) => {
+  createTags(e.target.value);
+  if (e.key === 'Enter') {
+    setTimeout(() => {
+      textarea.value = '';
+    }, 10);
+
+    const secretSantas = e.target.value.split(',');
+    const elves = e.target.value.split(',');
+
+    assignElves(secretSantas, elves);
+  }
+});
+
+const createTags = (input) => {
+  const tags = input
+    .split(',')
+    .filter((tag) => tag.trim() !== '')
+    .map((tag) => tag.trim());
+
+  tagsEl.innerHTML = '';
+
+  tags.forEach((tag) => {
+    const tagEl = document.createElement('span');
+    tagEl.classList.add('tag');
+    tagEl.innerText = tag;
+    tagsEl.appendChild(tagEl);
+  });
+};
 
 const getRandomName = (array) =>
-  array[Math.floor(Math.random() * array.length)];
-
-// Store all the names in 2 different arrays (secretSanta's and elves)
-const secretSantas = names.slice();
-const elves = names.slice();
+  array[Math.floor(Math.random() * array.length)].trim();
 
 // Loop over secretSanta's array
 const assignElves = (secretSantas, elves) => {
@@ -39,5 +54,3 @@ const assignElves = (secretSantas, elves) => {
     console.log(`${secretSanta} is the Secret Santa of ${randomElf}!`);
   });
 };
-
-assignElves(secretSantas, elves);

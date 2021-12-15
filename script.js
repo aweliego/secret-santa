@@ -1,3 +1,4 @@
+const container = document.getElementById('container');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
 
@@ -33,8 +34,9 @@ const createTags = (input) => {
   });
 };
 
+// Helper function to generate a random name
 const getRandomName = (array) =>
-  array[Math.floor(Math.random() * array.length)].trim();
+  array[Math.floor(Math.random() * array.length)];
 
 // Loop over secretSanta's array
 const assignElves = (secretSantas, elves) => {
@@ -51,6 +53,6 @@ const assignElves = (secretSantas, elves) => {
     // Remove randomElf from elves array (so it can't be picked again)
     elves.splice(elves.indexOf(randomElf), 1);
     // Display secretSanta and their elf
-    console.log(`${secretSanta} is the Secret Santa of ${randomElf}!`);
+    console.log(`${secretSanta.trim()} is the Secret Santa of ${randomElf.trim()}!`);
   });
 };

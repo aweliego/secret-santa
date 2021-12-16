@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const container = document.getElementById('container');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
@@ -14,6 +15,7 @@ textarea.addEventListener('keyup', (e) => {
     const secretSantas = e.target.value.split(',');
     const elves = e.target.value.split(',');
 
+    container.remove();
     assignElves(secretSantas, elves);
   }
 });
@@ -40,6 +42,13 @@ const getRandomName = (array) =>
 
 // Loop over secretSanta's array
 const assignElves = (secretSantas, elves) => {
+  const resultsSection = document.createElement('div');
+  resultsSection.setAttribute('id', 'results-section');
+  body.appendChild(resultsSection);
+
+  const results = document.createElement('div');
+  results.classList.add('results');
+
   secretSantas.forEach((secretSanta) => {
     // Randomly pick a name in elves array
     let randomElf = getRandomName(elves);
@@ -53,6 +62,13 @@ const assignElves = (secretSantas, elves) => {
     // Remove randomElf from elves array (so it can't be picked again)
     elves.splice(elves.indexOf(randomElf), 1);
     // Display secretSanta and their elf
-    console.log(`${secretSanta.trim()} is the Secret Santa of ${randomElf.trim()}!`);
+    console.log(
+      `${secretSanta.trim()} is the Secret Santa of ${randomElf.trim()}!`
+    );
+    const resultEl = document.createElement('p');
+
+    resultEl.innerHTML = `<span>${secretSanta.trim()} </span> is the secret Santa of <span>${randomElf.trim()}!</span>`;
+    results.appendChild(resultEl);
   });
+  resultsSection.appendChild(results);
 };

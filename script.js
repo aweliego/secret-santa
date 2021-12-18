@@ -1,4 +1,5 @@
 const body = document.querySelector('body');
+const main = document.querySelector('main');
 const container = document.getElementById('container');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
@@ -15,6 +16,8 @@ textarea.addEventListener('keyup', (e) => {
     const secretSantas = e.target.value.split(',');
     const elves = e.target.value.split(',');
 
+    updateSessionStorage(secretSantas, elves);
+
     container.innerHTML = `<h4>Loading the results...</h4>
     <div class="loading-animation">
       <i class="fas fa-sleigh"></i>
@@ -24,10 +27,11 @@ textarea.addEventListener('keyup', (e) => {
     setTimeout(() => {
       container.remove();
       assignElves(secretSantas, elves);
-    }, 2500);
+    }, 100);
   }
 });
 
+// Write out names out of text area (just for fun)
 const createTags = (input) => {
   const tags = input
     .split(',')
@@ -50,9 +54,10 @@ const getRandomName = (array) =>
 
 // Loop over secretSanta's array
 const assignElves = (secretSantas, elves) => {
+  main.innerHTML = '';
   const resultsSection = document.createElement('div');
   resultsSection.setAttribute('id', 'results-section');
-  body.appendChild(resultsSection);
+  main.appendChild(resultsSection);
 
   const results = document.createElement('div');
   results.classList.add('results');
@@ -79,12 +84,22 @@ const assignElves = (secretSantas, elves) => {
     results.appendChild(resultEl);
   });
   resultsSection.appendChild(results);
+};
 
-  const drawAgainBtn = document.createElement('button');
-  drawAgainBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
-  body.appendChild(drawAgainBtn);
+// Draw names randomly again with same list
+const drawBtn = document.createElement('button');
+drawBtn.classList.add('draw-btn');
+drawBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
+body.appendChild(drawBtn);
 
-  // drawAgainBtn.addEventListener('click', () => {
-  //   assignElves(secretSantas, elves);
-  // });
+drawBtn.addEventListener('click', () => {
+  const secretSantas = JSON.parse(sessionStorage.getItem('secretSantas'));
+  const elves = JSON.parse(sessionStorage.getItem('elves'));
+  assignElves(secretSantas, elves);
+});
+
+// Update session storage with names input
+const updateSessionStorage = (secretSantas, elves) => {
+  sessionStorage.setItem('secretSantas', JSON.stringify(secretSantas));
+  sessionStorage.setItem('elves', JSON.stringify(elves));
 };

@@ -43,6 +43,10 @@ textarea::placeholder {
   padding: 0 0 0 5px;
 }
 
+textarea:focus {
+  outline: 0;
+}
+
 /* Make placeholder text transparent and disappear when textarea field is in focus */
 .placeholder-fix:focus::-webkit-input-placeholder {
   color: transparent;
@@ -65,6 +69,57 @@ textarea::placeholder {
   margin: 5px 5px;
   border-radius: 50px;
   font-size: 14px;
+}
+
+h4 {
+  font-size: 22px;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.loading-animation {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  font-size: 50px;
+  color: #fff;
+  margin: 40px 0 0 0;
+}
+
+.fa-sleigh {
+  animation: slide 1s linear infinite alternate;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(125%);
+  }
+
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.fa-gifts {
+  animation: scale 2s linear 1s infinite alternate;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 #results-section {

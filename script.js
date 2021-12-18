@@ -15,8 +15,16 @@ textarea.addEventListener('keyup', (e) => {
     const secretSantas = e.target.value.split(',');
     const elves = e.target.value.split(',');
 
-    container.remove();
-    assignElves(secretSantas, elves);
+    container.innerHTML = `<h4>Loading the results...</h4>
+    <div class="loading-animation">
+      <i class="fas fa-sleigh"></i>
+      <i class="fas fa-gifts"></i>
+    </div>`;
+
+    setTimeout(() => {
+      container.remove();
+      assignElves(secretSantas, elves);
+    }, 2500);
   }
 });
 

@@ -79,4 +79,12 @@ const assignElves = (secretSantas, elves) => {
     results.appendChild(resultEl);
   });
   resultsSection.appendChild(results);
+
+  const drawAgainBtn = document.createElement('button');
+  drawAgainBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
+  body.appendChild(drawAgainBtn);
+
+  // drawAgainBtn.addEventListener('click', () => {
+  //   assignElves(secretSantas, elves);
+  // });
 };

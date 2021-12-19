@@ -4,6 +4,12 @@ const container = document.getElementById('container');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
 
+const drawBtn = document.createElement('button');
+drawBtn.classList.add('draw-btn');
+drawBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
+drawBtn.style.display = 'none';
+body.appendChild(drawBtn);
+
 textarea.focus();
 
 textarea.addEventListener('keyup', (e) => {
@@ -25,7 +31,8 @@ textarea.addEventListener('keyup', (e) => {
     </div>`;
 
     setTimeout(() => {
-      container.remove();
+      container.style.display = 'none';
+      drawBtn.style.display = 'inline-block';
       assignElves(secretSantas, elves);
     }, 100);
   }
@@ -87,11 +94,6 @@ const assignElves = (secretSantas, elves) => {
 };
 
 // Draw names randomly again with same list
-const drawBtn = document.createElement('button');
-drawBtn.classList.add('draw-btn');
-drawBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
-body.appendChild(drawBtn);
-
 drawBtn.addEventListener('click', () => {
   const secretSantas = JSON.parse(sessionStorage.getItem('secretSantas'));
   const elves = JSON.parse(sessionStorage.getItem('elves'));

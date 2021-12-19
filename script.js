@@ -48,6 +48,8 @@ textarea.addEventListener('keyup', (e) => {
         container.style.display = 'none';
         main.style.display = 'block';
         btns.style.display = 'block';
+        body.style.background =
+          '#fff url("white-bg.jpeg") no-repeat fixed top / cover';
         assignElves(secretSantas, elves);
       }, 100);
     }

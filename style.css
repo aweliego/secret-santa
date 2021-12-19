@@ -10,6 +10,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
+  overflow-x: hidden;
 }
 
 .container {
@@ -146,6 +147,14 @@ h4 {
   font-weight: bold;
 }
 
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 600px;
+}
+
 button {
   font-family: inherit;
   font-size: inherit;
@@ -157,7 +166,7 @@ button {
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
   padding: 20px 40px;
   cursor: pointer;
-  margin: 0 0 40 0;
+  margin: 0 20px 20px 0;
   transition: all 0.3s ease;
 }
 
@@ -170,7 +179,8 @@ button:active {
   outline: 0;
 }
 
-.fa-gift {
+.fa-gift,
+.fa-edit {
   font-size: 24px;
   margin-left: 5px;
 }

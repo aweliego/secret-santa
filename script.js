@@ -4,11 +4,21 @@ const container = document.getElementById('container');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
 
+// create btns but only show them once the list is submitted
+const btns = document.createElement('div');
+btns.classList.add('btns');
+btns.style.display = 'none';
+body.appendChild(btns);
+
 const drawBtn = document.createElement('button');
 drawBtn.classList.add('draw-btn');
 drawBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
-drawBtn.style.display = 'none';
-body.appendChild(drawBtn);
+btns.appendChild(drawBtn);
+
+const editBtn = document.createElement('button');
+editBtn.classList.add('edit-btn');
+editBtn.innerHTML = `Edit list <i class="fas fa-edit"></i>`;
+btns.appendChild(editBtn);
 
 textarea.focus();
 
@@ -32,7 +42,7 @@ textarea.addEventListener('keyup', (e) => {
 
     setTimeout(() => {
       container.style.display = 'none';
-      drawBtn.style.display = 'inline-block';
+      btns.style.display = 'block';
       assignElves(secretSantas, elves);
     }, 100);
   }

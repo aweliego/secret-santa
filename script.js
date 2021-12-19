@@ -24,27 +24,33 @@ textarea.focus();
 
 textarea.addEventListener('keyup', (e) => {
   createTags(e.target.value);
-  if (e.key === 'Enter') {
-    setTimeout(() => {
-      textarea.value = '';
-    }, 10);
 
+  if (e.key === 'Enter') {
     const secretSantas = e.target.value.split(',');
     const elves = e.target.value.split(',');
 
-    updateSessionStorage(secretSantas, elves);
+    if (secretSantas.length < 3) {
+      alert('Please enter at least 3 names!');
+    } else {
+      setTimeout(() => {
+        textarea.value = '';
+      }, 10);
 
-    container.innerHTML = `<h4>Loading the results...</h4>
-    <div class="loading-animation">
-      <i class="fas fa-sleigh"></i>
-      <i class="fas fa-gifts"></i>
-    </div>`;
+      updateSessionStorage(secretSantas, elves);
 
-    setTimeout(() => {
-      container.style.display = 'none';
-      btns.style.display = 'block';
-      assignElves(secretSantas, elves);
-    }, 100);
+      container.innerHTML = `<h4>Loading the results...</h4>
+      <div class="loading-animation">
+        <i class="fas fa-sleigh"></i>
+        <i class="fas fa-gifts"></i>
+      </div>`;
+
+      setTimeout(() => {
+        container.style.display = 'none';
+        main.style.display = 'block';
+        btns.style.display = 'block';
+        assignElves(secretSantas, elves);
+      }, 100);
+    }
   }
 });
 

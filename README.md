@@ -7,3 +7,7 @@ The results can be drawn anew randomly with the same list, or the list can be ed
 ## Demo
 
 ![Play demo](demo/demo.gif)
+
+## Credits
+
+Some elements of the UI and the typing out effect when writing in the textarea are from ![this cool little project](https://github.com/bradtraversy/50projects50days/tree/master/random-choice-picker) from ![https://github.com/bradtraversy](@bradtravery).

@@ -17,7 +17,7 @@
   </head>
   <body>
     <!-- <div class="background"></div> -->
-    <section>
+    <section id="submit-page">
       <div id="container" class="container">
         <h3 class="instructions">
           Enter all the participants' names divided by a comma (',')
@@ -27,13 +27,21 @@
         <textarea
           placeholder="Enter the names here..."
           id="textarea"
-          class="placeholder-fix"
+          class="placeholder-fix textarea"
         ></textarea>
 
         <div id="tags"></div>
       </div>
+
+      <div id="loader">
+        <h4>Loading the results...</h4>
+        <div class="loading-animation">
+          <i class="fas fa-sleigh"></i>
+          <i class="fas fa-gifts"></i>
+        </div>
+      </div>
     </section>
 
-    <main></main>
+    <section id="results"></section>
   </body>
 </html>

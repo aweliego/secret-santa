@@ -1,8 +1,11 @@
 const body = document.querySelector('body');
-const main = document.querySelector('main');
+// const main = document.querySelector('main');
+const submitPage = document.getElementById('submit-page');
 const container = document.getElementById('container');
+const resultsSection = document.getElementById('results');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
+const loadingEl = document.getElementById('loader');
 
 // create btns but only show them once the list is submitted
 const btns = document.createElement('div');
@@ -22,7 +25,7 @@ btns.appendChild(editBtn);
 
 textarea.focus();
 
-textarea.addEventListener('keyup', (e) => {
+container.addEventListener('keyup', (e) => {
   createTags(e.target.value);
 
   if (e.key === 'Enter') {
@@ -38,15 +41,12 @@ textarea.addEventListener('keyup', (e) => {
 
       updateSessionStorage(secretSantas, elves);
 
-      container.innerHTML = `<h4>Loading the results...</h4>
-      <div class="loading-animation">
-        <i class="fas fa-sleigh"></i>
-        <i class="fas fa-gifts"></i>
-      </div>`;
+      container.style.display = 'none';
+      loadingEl.style.display = 'flex';
 
       setTimeout(() => {
-        container.style.display = 'none';
-        main.style.display = 'block';
+        submitPage.style.display = 'none';
+        resultsSection.style.display = 'flex';
         btns.style.display = 'block';
         body.style.background =
           '#fff url("white-bg.jpeg") no-repeat fixed top / cover';
@@ -79,10 +79,7 @@ const getRandomName = (array) =>
 
 // Loop over secretSanta's array
 const assignElves = (secretSantas, elves) => {
-  main.innerHTML = '';
-  const resultsSection = document.createElement('div');
-  resultsSection.setAttribute('id', 'results-section');
-  main.appendChild(resultsSection);
+  resultsSection.innerHTML = '';
 
   const results = document.createElement('div');
   results.classList.add('results');
@@ -123,3 +120,29 @@ const updateSessionStorage = (secretSantas, elves) => {
   sessionStorage.setItem('secretSantas', JSON.stringify(secretSantas));
   sessionStorage.setItem('elves', JSON.stringify(elves));
 };
+
+// Edit list of names
+editBtn.addEventListener('click', () => {
+  resultsSection.style.display = 'none';
+  btns.style.display = 'none';
+  submitPage.style.display = 'block';
+  container.style.display = 'flex';
+  loadingEl.style.display = 'none';
+  body.style.background = '#ac2918 url("red-bg.jpeg") no-repeat fixed top / cover';
+
+  const secretSantas = JSON.parse(sessionStorage.getItem('secretSantas'));
+
+  // this works but tags are not created and list can't be submitted (probably losing event handler on textarea after container.innerHTML is modified)
+  container.innerHTML = `<h3 class="instructions">
+  Enter all the participants' names divided by a comma (',')
+</h3>
+<p class="instructions">Press Enter when you're done</p>
+
+<textarea
+  placeholder="Enter the names here..."
+  id="textarea"
+  class="placeholder-fix"
+>${secretSantas}</textarea>
+
+<div id="tags"></div>`;
+});

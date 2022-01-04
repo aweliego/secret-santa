@@ -31,11 +31,7 @@ container.addEventListener('keyup', (e) => {
       loadingEl.style.display = 'flex';
 
       setTimeout(() => {
-        submitPage.style.display = 'none';
-        resultsSection.style.display = 'flex';
-        btns.style.display = 'flex';
-        body.style.background =
-          '#fff url("white-bg.jpeg") no-repeat fixed top / cover';
+        setResultStyles();
         assignElves(secretSantas, elves);
       }, 100);
     }
@@ -109,13 +105,7 @@ const updateSessionStorage = (secretSantas, elves) => {
 
 // Edit list of names
 editBtn.addEventListener('click', () => {
-  resultsSection.style.display = 'none';
-  btns.style.display = 'none';
-  submitPage.style.display = 'block';
-  container.style.display = 'flex';
-  loadingEl.style.display = 'none';
-  body.style.background =
-    '#ac2918 url("red-bg.jpeg") no-repeat fixed top / cover';
+  revertToDefaultStyles();
 
   const secretSantas = JSON.parse(sessionStorage.getItem('secretSantas'));
 
@@ -133,3 +123,21 @@ editBtn.addEventListener('click', () => {
 
 <div id="tags"></div>`;
 });
+
+const revertToDefaultStyles = () => {
+  resultsSection.style.display = 'none';
+  btns.style.display = 'none';
+  submitPage.style.display = 'block';
+  container.style.display = 'flex';
+  loadingEl.style.display = 'none';
+  body.style.background =
+    '#ac2918 url("red-bg.jpeg") no-repeat fixed top / cover';
+};
+
+const setResultStyles = () => {
+  submitPage.style.display = 'none';
+  resultsSection.style.display = 'flex';
+  btns.style.display = 'flex';
+  body.style.background =
+    '#fff url("white-bg.jpeg") no-repeat fixed top / cover';
+};

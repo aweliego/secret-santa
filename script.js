@@ -1,10 +1,10 @@
 const body = document.querySelector('body');
 const submitPage = document.getElementById('submit-page');
 const container = document.getElementById('container');
-const resultsSection = document.getElementById('results');
-const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
+const tagsEl = document.getElementById('tags');
 const loadingEl = document.getElementById('loader');
+const resultsSection = document.getElementById('results');
 const btns = document.querySelector('.btns');
 const drawBtn = document.querySelector('.draw-btn');
 const editBtn = document.querySelector('.edit-btn');
@@ -20,21 +20,17 @@ container.addEventListener('keyup', (e) => {
 
     if (secretSantas.length < 3) {
       alert('Please enter at least 3 names!');
-    } else {
-      setTimeout(() => {
-        textarea.value = '';
-      }, 10);
-
-      updateSessionStorage(secretSantas, elves);
-
-      container.style.display = 'none';
-      loadingEl.style.display = 'flex';
-
-      setTimeout(() => {
-        setResultStyles();
-        assignElves(secretSantas, elves);
-      }, 100);
     }
+
+    updateSessionStorage(secretSantas, elves);
+
+    container.style.display = 'none';
+    loadingEl.style.display = 'flex';
+
+    setTimeout(() => {
+      setResultStyles();
+      assignElves(secretSantas, elves);
+    }, 100);
   }
 });
 
@@ -79,9 +75,9 @@ const assignElves = (secretSantas, elves) => {
     // Remove randomElf from elves array (so it can't be picked again)
     elves.splice(elves.indexOf(randomElf), 1);
     // Display secretSanta and their elf
-    console.log(
-      `${secretSanta.trim()} is the Secret Santa of ${randomElf.trim()}!`
-    );
+    // console.log(
+    //   `${secretSanta.trim()} is the Secret Santa of ${randomElf.trim()}!`
+    // );
     const resultEl = document.createElement('p');
 
     resultEl.innerHTML = `<span>${secretSanta.trim()} </span> is the secret Santa of <span>${randomElf.trim()}!</span>`;
@@ -109,7 +105,6 @@ editBtn.addEventListener('click', () => {
 
   const secretSantas = JSON.parse(sessionStorage.getItem('secretSantas'));
 
-  // this works but tags are not created and list can't be submitted (probably losing event handler on textarea after container.innerHTML is modified)
   container.innerHTML = `<h3 class="instructions">
   Enter all the participants' names divided by a comma (',')
 </h3>
@@ -121,7 +116,7 @@ editBtn.addEventListener('click', () => {
   class="placeholder-fix textarea"
 >${secretSantas}</textarea>
 
-<div id="tags"></div>`;
+<div id="tags">${createTags(secretSantas)}</div>`;
 });
 
 const revertToDefaultStyles = () => {

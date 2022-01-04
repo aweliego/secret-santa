@@ -30,7 +30,7 @@ container.addEventListener('keyup', (e) => {
     setTimeout(() => {
       setResultStyles();
       assignElves(secretSantas, elves);
-    }, 100);
+    }, 1500);
   }
 });
 
@@ -75,9 +75,6 @@ const assignElves = (secretSantas, elves) => {
     // Remove randomElf from elves array (so it can't be picked again)
     elves.splice(elves.indexOf(randomElf), 1);
     // Display secretSanta and their elf
-    // console.log(
-    //   `${secretSanta.trim()} is the Secret Santa of ${randomElf.trim()}!`
-    // );
     const resultEl = document.createElement('p');
 
     resultEl.innerHTML = `<span>${secretSanta.trim()} </span> is the secret Santa of <span>${randomElf.trim()}!</span>`;
@@ -92,12 +89,6 @@ drawBtn.addEventListener('click', () => {
   const elves = JSON.parse(sessionStorage.getItem('elves'));
   assignElves(secretSantas, elves);
 });
-
-// Update session storage with names input
-const updateSessionStorage = (secretSantas, elves) => {
-  sessionStorage.setItem('secretSantas', JSON.stringify(secretSantas));
-  sessionStorage.setItem('elves', JSON.stringify(elves));
-};
 
 // Edit list of names
 editBtn.addEventListener('click', () => {
@@ -118,6 +109,12 @@ editBtn.addEventListener('click', () => {
 
 <div id="tags">${createTags(secretSantas)}</div>`;
 });
+
+// Update session storage with names input
+const updateSessionStorage = (secretSantas, elves) => {
+  sessionStorage.setItem('secretSantas', JSON.stringify(secretSantas));
+  sessionStorage.setItem('elves', JSON.stringify(elves));
+};
 
 const revertToDefaultStyles = () => {
   resultsSection.style.display = 'none';

@@ -1,27 +1,13 @@
 const body = document.querySelector('body');
-// const main = document.querySelector('main');
 const submitPage = document.getElementById('submit-page');
 const container = document.getElementById('container');
 const resultsSection = document.getElementById('results');
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
 const loadingEl = document.getElementById('loader');
-
-// create btns but only show them once the list is submitted
-const btns = document.createElement('div');
-btns.classList.add('btns');
-btns.style.display = 'none';
-body.appendChild(btns);
-
-const drawBtn = document.createElement('button');
-drawBtn.classList.add('draw-btn');
-drawBtn.innerHTML = `Draw names again <i class="fas fa-gift"></i>`;
-btns.appendChild(drawBtn);
-
-const editBtn = document.createElement('button');
-editBtn.classList.add('edit-btn');
-editBtn.innerHTML = `Edit list <i class="fas fa-edit"></i>`;
-btns.appendChild(editBtn);
+const btns = document.querySelector('.btns');
+const drawBtn = document.querySelector('.draw-btn');
+const editBtn = document.querySelector('.edit-btn');
 
 textarea.focus();
 
@@ -47,7 +33,7 @@ container.addEventListener('keyup', (e) => {
       setTimeout(() => {
         submitPage.style.display = 'none';
         resultsSection.style.display = 'flex';
-        btns.style.display = 'block';
+        btns.style.display = 'flex';
         body.style.background =
           '#fff url("white-bg.jpeg") no-repeat fixed top / cover';
         assignElves(secretSantas, elves);
@@ -128,7 +114,8 @@ editBtn.addEventListener('click', () => {
   submitPage.style.display = 'block';
   container.style.display = 'flex';
   loadingEl.style.display = 'none';
-  body.style.background = '#ac2918 url("red-bg.jpeg") no-repeat fixed top / cover';
+  body.style.background =
+    '#ac2918 url("red-bg.jpeg") no-repeat fixed top / cover';
 
   const secretSantas = JSON.parse(sessionStorage.getItem('secretSantas'));
 
@@ -141,7 +128,7 @@ editBtn.addEventListener('click', () => {
 <textarea
   placeholder="Enter the names here..."
   id="textarea"
-  class="placeholder-fix"
+  class="placeholder-fix textarea"
 >${secretSantas}</textarea>
 
 <div id="tags"></div>`;
